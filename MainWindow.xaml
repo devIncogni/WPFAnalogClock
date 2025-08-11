@@ -6,43 +6,43 @@
         xmlns:local="clr-namespace:WPFAnalogClock"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-	<Grid>
-		<Canvas ClipToBounds="True">
-			<Canvas.Resources>
-				<ControlTemplate x:Key="ClockHandTemplate">
-					<Polygon Points="-0.3,-1 -0.2,8 0,9 0.2,8 0.3,-1" Fill="Navy"/>
-				</ControlTemplate>
+    <Grid>
+        <Canvas ClipToBounds="True">
+            <Canvas.Resources>
+                <ControlTemplate x:Key="ClockHandTemplate">
+                    <Polygon Points="-0.3,-1 -0.2,8 0,9 0.2,8 0.3,-1" Fill="Navy"/>
+                </ControlTemplate>
 
                 <ControlTemplate x:Key="ClockSecondHandTemplate">
                     <Polygon Points="-0.3,-1 -0.2,8 0,9 0.2,8 0.3,-1" Fill="Red"/>
                 </ControlTemplate>
             </Canvas.Resources>
-			<!-- Clock Center Circle -->
-			<Ellipse Canvas.Left="0" Canvas.Top="0" Width="20" Height="20" Fill="LightGray"/>
-			<!-- Minute Hand -->
-			<Control Name="MinuteHand" Template="{StaticResource ClockHandTemplate}">
-				<Control.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform ScaleX="1.7" ScaleY="0.7"/>
-						<RotateTransform x:Name="MinuteRotate" Angle="0"/>
-						<TranslateTransform X="10" Y="10"/>
-					</TransformGroup>
-				</Control.RenderTransform>
-			</Control>
-			<!-- Hour Hand -->
-			<Control Name="HourHand" Template="{StaticResource ClockHandTemplate}">
-				<Control.RenderTransform>
-					<TransformGroup>
-						<ScaleTransform ScaleX="1.7" ScaleY="0.6"/>
+            <!-- Clock Center Circle -->
+            <Ellipse Canvas.Left="0" Canvas.Top="0" Width="20" Height="20" Fill="LightGray"/>
+            <!-- Minute Hand -->
+            <Control Name="MinuteHand" Template="{StaticResource ClockHandTemplate}">
+                <Control.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1.7" ScaleY="0.7"/>
+                        <RotateTransform x:Name="MinuteRotate" Angle="0"/>
+                        <TranslateTransform X="10" Y="10"/>
+                    </TransformGroup>
+                </Control.RenderTransform>
+            </Control>
+            <!-- Hour Hand -->
+            <Control Name="HourHand" Template="{StaticResource ClockHandTemplate}">
+                <Control.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1.7" ScaleY="0.6"/>
 
-						<RotateTransform x:Name="HourRotate" Angle="0"/>
-						<TranslateTransform X="10" Y="10"/>
-					</TransformGroup>
-				</Control.RenderTransform>
-			</Control>
+                        <RotateTransform x:Name="HourRotate" Angle="0"/>
+                        <TranslateTransform X="10" Y="10"/>
+                    </TransformGroup>
+                </Control.RenderTransform>
+            </Control>
             <!-- Second Hand-->
             <Control Name="SecondHand" Template="{StaticResource ClockSecondHandTemplate}">
-                
+
                 <Control.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform ScaleX="1" ScaleY="1"/>
@@ -53,33 +53,40 @@
                 </Control.RenderTransform>
             </Control>
             <!-- Canvas transforms to scale clock -->
-			<Canvas.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform ScaleX="4.8" ScaleY="4.8"/>
-					<TranslateTransform X="48" Y="48"/>
-				</TransformGroup>
-			</Canvas.RenderTransform>
-			<!-- Animations -->
-			<Canvas.Triggers>
-				<EventTrigger RoutedEvent="FrameworkElement.Loaded">
-					<BeginStoryboard>
-						<Storyboard RepeatBehavior="Forever">
-							<!-- Minute Hand: full rotation in 60 minutes -->
-							<DoubleAnimation
+            <Canvas.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="4.8" ScaleY="4.8"/>
+                    <TranslateTransform X="48" Y="48"/>
+                </TransformGroup>
+            </Canvas.RenderTransform>
+            <!-- Animations -->
+            <Canvas.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                    <BeginStoryboard>
+                        <Storyboard RepeatBehavior="Forever">
+                            <!-- Minute Hand: full rotation in 60 minutes -->
+                            <DoubleAnimation
 							Storyboard.TargetName="MinuteRotate"
 							Storyboard.TargetProperty="Angle"
 							From="0" To="360"
 							Duration="01:00:00"/>
-							<!-- Hour Hand: full rotation in 12 hours -->
-							<DoubleAnimation
+                            <!-- Hour Hand: full rotation in 12 hours -->
+                            <DoubleAnimation
 							Storyboard.TargetName="HourRotate"
 							Storyboard.TargetProperty="Angle"
 							From="0" To="360"
 							Duration="12:00:00"/>
-						</Storyboard>
-					</BeginStoryboard>
-				</EventTrigger>
-			</Canvas.Triggers>
-		</Canvas>
-	</Grid>
+
+                            <!--Second Hand rotation in 1 min-->
+                            <DoubleAnimation
+                            Storyboard.TargetName="HourRotate"
+                            Storyboard.TargetProperty="Angle"
+                            From="0" To="360"
+                            Duration="00:01:00"/>
+                        </Storyboard>
+                    </BeginStoryboard>
+                </EventTrigger>
+            </Canvas.Triggers>
+        </Canvas>
+    </Grid>
 </Window>
