@@ -12,7 +12,11 @@
 				<ControlTemplate x:Key="ClockHandTemplate">
 					<Polygon Points="-0.3,-1 -0.2,8 0,9 0.2,8 0.3,-1" Fill="Navy"/>
 				</ControlTemplate>
-			</Canvas.Resources>
+
+                <ControlTemplate x:Key="ClockSecondHandTemplate">
+                    <Polygon Points="-0.3,-1 -0.2,8 0,9 0.2,8 0.3,-1" Fill="Red"/>
+                </ControlTemplate>
+            </Canvas.Resources>
 			<!-- Clock Center Circle -->
 			<Ellipse Canvas.Left="0" Canvas.Top="0" Width="20" Height="20" Fill="LightGray"/>
 			<!-- Minute Hand -->
@@ -36,7 +40,19 @@
 					</TransformGroup>
 				</Control.RenderTransform>
 			</Control>
-			<!-- Canvas transforms to scale clock -->
+            <!-- Second Hand-->
+            <Control Name="SecondHand" Template="{StaticResource ClockSecondHandTemplate}">
+                
+                <Control.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleX="1" ScaleY="1"/>
+
+                        <RotateTransform x:Name="SecondRotate" Angle="0"/>
+                        <TranslateTransform X="10" Y="10"/>
+                    </TransformGroup>
+                </Control.RenderTransform>
+            </Control>
+            <!-- Canvas transforms to scale clock -->
 			<Canvas.RenderTransform>
 				<TransformGroup>
 					<ScaleTransform ScaleX="4.8" ScaleY="4.8"/>
