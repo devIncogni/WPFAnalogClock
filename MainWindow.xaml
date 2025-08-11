@@ -69,20 +69,23 @@
 							Storyboard.TargetName="MinuteRotate"
 							Storyboard.TargetProperty="Angle"
 							From="0" To="360"
-							Duration="01:00:00"/>
+							Duration="01:00:00"
+							RepeatBehavior="Forever"/>
                             <!-- Hour Hand: full rotation in 12 hours -->
                             <DoubleAnimation
 							Storyboard.TargetName="HourRotate"
 							Storyboard.TargetProperty="Angle"
 							From="0" To="360"
-							Duration="12:00:00"/>
+							Duration="12:00:00"
+							RepeatBehavior="Forever"/>
 
                             <!--Second Hand rotation in 1 min-->
                             <DoubleAnimation
-                            Storyboard.TargetName="HourRotate"
+                            Storyboard.TargetName="SecondRotate"
                             Storyboard.TargetProperty="Angle"
                             From="0" To="360"
-                            Duration="00:01:00"/>
+                            Duration="00:01:00"
+							RepeatBehavior="Forever"/>
                         </Storyboard>
                     </BeginStoryboard>
                 </EventTrigger>
